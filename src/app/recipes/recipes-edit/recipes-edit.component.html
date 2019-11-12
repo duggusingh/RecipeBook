@@ -1,0 +1,73 @@
+<div style="background-color:pink;border:2px solid black;padding-left:25px;">
+    <hr>
+    <div class="row">
+        <div class="col-md-10">
+            <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-md-12" style="-webkit-text-fill-color: blue">
+                        <button type="submit" class="btn btn-success" [disabled]="!recipeForm.valid">Save</button>
+                        <button type="button" class="btn btn-danger" (click)="onClear()">Cancel</button>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12" style="-webkit-text-fill-color: blue">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" formControlName="name" id="name" class="form-control" style="border-block-end-color: black">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" style="-webkit-text-fill-color: blue">
+                        <div class="form-group">
+                            <label for="imagePath">Image Url</label>
+                            <input type="text" id="imagePath" formControlName="imagePath" class="form-control" style="border-block-end-color: black"
+                                #imagePath>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" style="-webkit-text-fill-color: blue">
+                        <div class="form-group">
+                            <img [src]="imagePath.value" alt="Image not loaded" class="img-responsive" style="border-block-end-color: black">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" style="-webkit-text-fill-color: blue">
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea type="text" id="description" formControlName="description" class="form-control" style="border-block-end-color: black">
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" style="-webkit-text-fill-color: blue" formArrayName="ingredients">
+                        <div class="row" *ngFor="let ingredientsCtrl of recipeForm.get('ingredients').controls;let i=index" [formGroupName]="i">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" style="border-block-end-color: black" formControlName="name">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="number" class="form-control" formControlName="amount">
+                            </div>
+                            <div class="col-md-2">
+                                <button type="botton" class="form-control" class="btn btn-danger" style="border-block-end-color: black" (click)="onCut(i)">X</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-5">
+                        <button type="button" class="btn btn-success" (click)="onSubmits()">Add Ingredient</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
